@@ -1,56 +1,157 @@
-import React, { useState, useEffect } from 'react';
 
-const SpotifyComponent: React.FC = () => {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [albumTracks, setAlbumTracks] = useState<any[]>([]);
+import React, { useRef } from "react";
+import { styled } from "styled-components";
+import Carousel from "../components/Slider";
+import PauseCarousel from "../components/PuaseSlider";
 
-  useEffect(() => {
-    // Extract access token from URL hash
-    const hashParams = new URLSearchParams(window.location.hash.substr(1));
-    const token = hashParams.get('access_token');
-
-    if (token) {
-      setAccessToken(token);
-    }
-  }, []);
-
-  const fetchAlbumTracks = async () => {
-    if (accessToken) {
-      const playlist_id = '3cEYpjA9oz9GiPac4AsH4n'; // Replace with actual album ID
-
-      const response = await fetch(`
-      https://api.spotify.com/v1/playlists/${playlist_id}`, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
-
-      const data = await response.json();
-      setAlbumTracks(data.items);
-    }
-  };
-
-  return (
-    <div>
-      <h1>Spotify Album Tracks Example</h1>
-      {accessToken ? (
-        <div>
-          <button onClick={fetchAlbumTracks}>Fetch Album Tracks</button>
-          <ul>
-            {albumTracks?.map((track, index) => (
-              <li key={index}>
-                {track.name} - {track.artists[0].name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : (
-        <a href="https://accounts.spotify.com/authorize?client_id=f3a48d1e185a40c492a0e4565f1b913e&response_type=token&redirect_uri=http://localhost:3000&scope=user-read-private%20user-read-email">
-          Log in with Spotify
-        </a>
-      )}
-    </div>
-  );
+const Home = () => {
+    return (
+        <HomeWrapper>
+            <div className="recommdentaionTag">
+                <h2>Today's recommended song</h2>
+                <ul>
+                    <li>
+                        <img src="/img_test.jpg" alt="album" />
+                        <div className="album-info">
+                            <h4>sing sang sung</h4>
+                            <p>
+                                Velit exercitation nulla laborum mollit pariatur
+                                tempor eiusmod tempor ut ad aliqua esse enim.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/img_test2.jpg" alt="album" />
+                        <div className="album-info">
+                            <h4>sing sang sung</h4>
+                            <p>
+                                Velit exercitation nulla laborum mollit pariatur
+                                tempor eiusmod tempor ut ad aliqua esse enim.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/img_test.jpg" alt="album" />
+                        <div className="album-info">
+                            <h4>sing sang sung</h4>
+                            <p>
+                                Velit exercitation nulla laborum mollit pariatur
+                                tempor eiusmod tempor ut ad aliqua esse enim.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/img_test2.jpg" alt="album" />
+                        <div className="album-info">
+                            <h4>sing sang sung</h4>
+                            <p>
+                                Velit exercitation nulla laborum mollit pariatur
+                                tempor eiusmod tempor ut ad aliqua esse enim.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/img_test.jpg" alt="album" />
+                        <div className="album-info">
+                            <h4>sing sang sung</h4>
+                            <p>
+                                Velit exercitation nulla laborum mollit pariatur
+                                tempor eiusmod tempor ut ad aliqua esse enim.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <img src="/img_test2.jpg" alt="album" />
+                        <div className="album-info">
+                            <h4>sing sang sung</h4>
+                            <p>
+                                Velit exercitation nulla laborum mollit pariatur
+                                tempor eiusmod tempor ut ad aliqua esse enim.
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="hotAlbumTag">
+                <h2>Now hot 10 albums</h2>
+                <div>
+                    <Carousel />
+                </div>
+            </div>
+            <div id="hotAlbumTag">
+                <h2>Artists of the month</h2>
+                <div>
+                    <PauseCarousel />
+                </div>
+            </div>
+        </HomeWrapper>
+    );
 };
 
-export default SpotifyComponent;
+export default Home;
+
+const HomeWrapper = styled.div`
+    width: 100%;
+    height: 100%;
+
+    border: 1px dotted gray;
+
+    .recommdentaionTag {
+        height: 25%;
+    }
+    h2 {
+        margin: 10px 0;
+        letter-spacing: -0.5px;
+        font-weight: 600;
+        color: white;
+    }
+    ul {
+        margin-top: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+    li {
+        padding: 6px 10px;
+        background-color: rgba(163, 163, 163, 0.836);
+        border: 1px solid rgba(236, 236, 236, 0.678);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        transition: background-color 0.6s;
+        &:hover {
+            background-color: rgba(212, 212, 212, 0.863);
+        }
+    }
+
+    ul > li > img {
+        border-radius: 8px;
+        width: 60px;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .album-info {
+        height: 45px;
+        flex-grow: 1;
+        padding: 4px 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: wrap;
+    }
+    h4 {
+        font-size: 12px;
+        font-weight: 600;
+    }
+    p {
+        margin-top: 2px;
+        padding: 4px;
+        font-size: 10px;
+    }
+
+    #hotAlbumTag {
+        margin-top: 20px;
+        height: 30%;
+    }
+`;
+

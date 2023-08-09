@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BsThreeDots } from "react-icons/bs";
@@ -254,8 +255,6 @@ const DetailAlbum = () => {
         </Comment>
       </CommentWrap>
     </Main>
-  );
-};
 
 export default DetailAlbum;
 
