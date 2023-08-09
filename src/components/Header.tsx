@@ -1,3 +1,10 @@
+
+import React from "react";
+import { styled } from "styled-components";
+
+const Header = () => {
+  return <HeaderWrap>Header</HeaderWrap>;
+
 import React, { useEffect, useRef } from "react";
 import Profile from "./Profile";
 import { styled } from "styled-components";
@@ -67,6 +74,13 @@ const Header: React.FC = () => {
 
 export default Header;
 
+
+const HeaderWrap = styled.header`
+  width: 100%;
+  height: 140px;
+  background-color: green;
+`
+
 const HeaderTag = styled.header`
     width: 100%;
     // margin: 0 auto;
@@ -85,3 +99,4 @@ const HeaderTag = styled.header`
         border-radius: 8px;
     }
 `;
+

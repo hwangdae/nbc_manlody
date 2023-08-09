@@ -1,3 +1,4 @@
+
 import React, { useRef } from "react";
 import { styled } from "styled-components";
 import Carousel from "../components/Slider";
@@ -153,3 +154,4 @@ const HomeWrapper = styled.div`
         height: 30%;
     }
 `;
+

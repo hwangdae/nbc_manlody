@@ -1,4 +1,9 @@
 import React from "react";
+import { styled } from "styled-components";
+
+const NavBar = () => {
+  return <Nav>NavBar</Nav>;
+
 import { Link } from "react-router-dom";
 import { styled } from "styled-components";
 
@@ -31,6 +36,12 @@ const NavBar = () => {
 
 export default NavBar;
 
+
+const Nav = styled.nav`
+  width: 300px;
+  height: 100vh;
+  background-color: red;
+`
 const Nav = styled.div`
     width: 100%;
     // hight: 100vh;
