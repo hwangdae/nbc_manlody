@@ -1,10 +1,13 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
-import { BsThreeDots } from "react-icons/bs";
-import { useParams } from "react-router-dom";
-import ReviewBox from "../components/detail-album/review/ReviewBox";
+
+
+
+import React, { useEffect, useState } from "react";
 import AlbumReview from "../components/detail-album/review/AlbumReview";
-import Review from "../components/detail-album/review/Review";
+import { useLocation, useParams } from "react-router-dom";
+import { styled } from "styled-components";
+import axios from "axios";
+import { accessToken } from "../components/Header";
+
 type Props = {
   userId: string;
   comment: ReviewCommentData;
@@ -21,267 +24,80 @@ interface ReviewCommentData {
   docId?: string;
 }
 
-const DetailAlbum = ({data}:any) => {
+const DetailAlbum = () => {
   const { album_id: albumId } = useParams();
-  const [isCheck, setIsCheck] = useState<boolean>();
+  const [album, setAlbum] = useState<any[]>([]);
+  const [openReview, setOpenReview] = useState(true);
+  const location = useLocation();
+  console.log("location.state=>", location.state);
+  // console.log("location.state.arr=>",location.state.arr)
+  const albumData = location.state.track;
+  console.log("albumData=>", albumData);
 
-  console.log(albumId)
-
-  const fetchToggleButton = () => {
-    setIsCheck(!isCheck);
+  const headers = {
+    Authorization: `Bearer ${accessToken}`, // accessToken 변수에 실제 access token 값이 들어가야 합니다.
   };
-  return (
-    <Main>
-      <AlbumWrap>
-        <div>이미지</div>
-        <h1>MELTDOWN (feat. Drake)</h1>
-      </AlbumWrap>
-      <Grid>
-        <GridItem>#</GridItem>
-        <GridItem>곡 정보</GridItem>
-        <GridItem>앨범 정보</GridItem>
-        <GridItem>날짜</GridItem>
-        <GridItem>좋아요</GridItem>
-        <GridItem>재생 시간</GridItem>
-      </Grid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <BodyGrid>
-        <GridItem>1</GridItem>
-        <GridItem>
-          <p
-            style={{
-              width: "40px",
-              height: "40px",
-              background: "red",
-              marginRight: "10px",
-            }}
-          ></p>
-          <div>
-            <h1>We’re Good</h1>
-            <p>Dua Lipa</p>
-          </div>
-        </GridItem>
-        <GridItem>Future Nostelgia (The Moonlight Edition)</GridItem>
-        <GridItem>3일 전</GridItem>
-        <GridItem>♥</GridItem>
-        <GridItem>2:45</GridItem>
-      </BodyGrid>
-      <AlbumReview/>
-      <ReviewBox data={data}/>
-      {/* <CommentWrap>
-        <CommentWiteForm>
-          <input></input>
-          <button>REGISTER</button>
-        </CommentWiteForm>
-        <Comment>
-          <h1>작성자</h1>
-          <h2>수록곡 전부 제 플리에 담았어요 너무 좋아요 !! 추천해요 !</h2>
-          <p>작성날짜</p>
-          <p>♥</p>
-          <ToggleButton onClick={fetchToggleButton}>
-            <BsThreeDots />
-            <ToggleBoxWrap>
-              <p>수정하기</p>
-              <p>삭제하기</p>
-            </ToggleBoxWrap>
-          </ToggleButton>
 
-          {isCheck ? <></> : <></>}
-        </Comment>
-      </CommentWrap> */}
-    </Main>
+  console.log("album=>", album);
+  console.log("album=>", album[0]);
+
+  useEffect(() => {
+    const getAlbumId = async () => {
+      const response = await axios.get(`https://api.spotify.com/v1/albums/${albumId}/tracks`, { headers });
+      console.log("response.data.items++====<>>=>", response.data.items);
+      setAlbum([...response.data.items]);
+      // return response.data
+    };
+    getAlbumId();
+  }, [albumId]);
+
+
+  // const optBtnRef = useRef(null);
+  // const handleWindowClick = (e: MouseEvent) => {
+  //   if (e.target !== optBtnRef.current) setIsOptBoxShow(false);
+  // };
+
+  // useEffect(() => {
+  //   window.addEventListener("click", handleWindowClick);
+  // }, []);
+
+  return (
+    <AlbumTag>
+      <div className="album-info">
+        <img src={albumData.albumUrl} alt="image" />
+
+        <div className="info-data">
+          <h1>{albumData.name}</h1>
+          <div>
+            <p>{albumData.album_type}</p>
+            <p>{albumData.release_date}</p>
+          </div>
+          <p className="artist-name">{albumData.artist}</p>
+        </div>
+        <button onClick={()=>(setOpenReview(!openReview))}>리뷰남기기</button>
+      </div>
+      {openReview ? (
+        <div className="result-album">
+          {album.map((item: any, index) => {
+            if (index < 5)
+              return (
+                <div key={item.uri}>
+                  <div>{item.name || "없음"}</div>
+                  <div>{item.uri}</div>
+                </div>
+              );
+          })}
+        </div>
+      ) : (
+        <AlbumReview />
+      <ReviewBox data={data}/>
+      )}
+    </AlbumTag>
   );
 };
 
 export default DetailAlbum;
+
 
 const Main = styled.main`
   width: 100%;
@@ -398,4 +214,32 @@ const ToggleBoxWrap = styled.div`
   background: #eee;
   border-radius: 7px;
   text-align: center;
+`;
+
+const AlbumTag = styled.div`
+  margin: 0;
+  .album-info {
+    display: flex;
+    // justify-content: center;
+    align-items: end;
+    img {
+      width: 180px;
+    }
+  }
+  .info-data {
+    margin-left: 10px;
+    margin-bottom: 0;
+    bottom: 0;
+    h1 {
+      font-size: 3rem;
+      font-weight: 600;
+    }
+    p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+    .artist-name {
+      margin-top: 20px;
+    }
+  }
 `;

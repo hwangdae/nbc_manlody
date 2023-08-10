@@ -52,16 +52,20 @@ const Nav = styled.div`
     transform: scale(1.017);
   }
 
-  img {
-    max-width: 100%;
-    height: auto;
-    cursor: pointer;
-    filter: grayscale(1);
-    transition: filter 0.8s;
-  }
-  img:hover {
-    filter: none;
-  }
+
+    img {
+        margin: 0 auto;
+        display:flex;
+        justify-content:center;
+        max-width: 80%;
+        height: auto;
+        cursor: pointer;
+        filter: grayscale(1);
+        transition: filter 0.8s;
+    }
+    img:hover {
+        filter: none;
+    }
 
   li {
     margin: 40px 0;
