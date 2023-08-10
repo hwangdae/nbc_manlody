@@ -1,10 +1,31 @@
-
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import { BsThreeDots } from "react-icons/bs";
+import { useParams } from "react-router-dom";
+import ReviewBox from "../components/detail-album/review/ReviewBox";
+import AlbumReview from "../components/detail-album/review/AlbumReview";
+import Review from "../components/detail-album/review/Review";
+type Props = {
+  userId: string;
+  comment: ReviewCommentData;
+  changeListener: number;
+};
 
-const DetailAlbum = () => {
+interface ReviewCommentData {
+  userId: string;
+  userName: string;
+  content: string;
+  albumId: string;
+  createdAt: number;
+  isUpdated: boolean;
+  docId?: string;
+}
+
+const DetailAlbum = ({data}:any) => {
+  const { album_id: albumId } = useParams();
   const [isCheck, setIsCheck] = useState<boolean>();
+
+  console.log(albumId)
 
   const fetchToggleButton = () => {
     setIsCheck(!isCheck);
@@ -233,7 +254,9 @@ const DetailAlbum = () => {
         <GridItem>♥</GridItem>
         <GridItem>2:45</GridItem>
       </BodyGrid>
-      <CommentWrap>
+      <AlbumReview/>
+      <ReviewBox data={data}/>
+      {/* <CommentWrap>
         <CommentWiteForm>
           <input></input>
           <button>REGISTER</button>
@@ -253,14 +276,24 @@ const DetailAlbum = () => {
 
           {isCheck ? <></> : <></>}
         </Comment>
-      </CommentWrap>
+      </CommentWrap> */}
     </Main>
+  );
+};
 
 export default DetailAlbum;
 
 const Main = styled.main`
-  background: #242424;
-  padding: 0px 20px;
+  width: 100%;
+  overflow-y: auto;
+  &::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: #217af4; /* 스크롤바의 색상 */ 
+    border-radius: 10px;
+}
+&::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
 `;
 const AlbumWrap = styled.div`
   display: flex;
@@ -275,17 +308,15 @@ const AlbumWrap = styled.div`
   }
   > h1 {
     font-size: 62px;
-    color: #fff;
+    color: #000;
     font-weight: bold;
   }
 `;
 const Grid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 3fr 4fr 0.5fr 0.5fr 0.5fr;
-  /* margin: 0px 20px; */
-  padding: 20px 0px;
-  background: #242424;
-  color: #b3b3b3;
+  grid-template-columns: 1fr 3fr 4fr 0.7fr 0.7fr 0.7fr;
+  padding: 10px 0px;
+  color: #000;
 `;
 const GridItem = styled.div`
   display: flex;

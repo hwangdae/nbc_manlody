@@ -5,6 +5,7 @@ import Carousel from "../components/Slider";
 import PauseCarousel from "../components/PuaseSlider";
 
 const Home = () => {
+
     return (
         <HomeWrapper>
             <div className="recommdentaionTag">
