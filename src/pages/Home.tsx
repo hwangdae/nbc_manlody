@@ -1,9 +1,11 @@
+
 import React, { useRef } from "react";
 import { styled } from "styled-components";
 import Carousel from "../components/Slider";
 import PauseCarousel from "../components/PuaseSlider";
 
 const Home = () => {
+
     return (
         <HomeWrapper>
             <div className="recommdentaionTag">
@@ -153,3 +155,4 @@ const HomeWrapper = styled.div`
         height: 30%;
     }
 `;
+

@@ -113,13 +113,13 @@ const Review = ({ comment, userId, changeListener }: Props) => {
 export default Review;
 const StReview = styled.div`
   .comment-div {
-    border: 1px solid gray;
     display: flex;
     position: relative;
     /* justify-content: space-between; */
     align-items: center;
     margin: 10px auto;
-
+    padding: 16px 10px;
+  border-bottom: solid 1px #adadad;
     .name {
       width: 15%;
     }

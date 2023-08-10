@@ -33,6 +33,7 @@ const spotifyApi = new SpotifyWebApi({
 export const accessToken = "BQCa89N9dnKhzQIB2PLWS0VNesXUzIvcKryln8ziU8DYctM9GU47ztcSmlPjhz6fXptdrUv3OfSRNwG8hJ4M0ebEZLM2622UMVJ3UkXs1NlzYE1BsML3xT-_JilD67z9F79LmBhvXdHIe3DBs7m7nj8NghImqmvKIwjmoiRAzJW7VEz6L2quWQ293lN5mkPmc1d51vKLKxkoc5sH1wNrl-oC0f1O1kTT"
 
 const Header: React.FC = () => {
+
   // const searchIconRef = useRef<HTMLSpanElement | null>(null);
   // const searchInputRef = useRef<HTMLSpanElement | null>(null);
 
@@ -50,6 +51,7 @@ const Header: React.FC = () => {
   //         searchInputRef.current.style.transform = "translate(-30px)";
   //     }
   // };
+
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState<Track[]>([]);
   const [playingTrack, setPlayingTrack] = useState<Track | undefined>();
@@ -111,7 +113,7 @@ const Header: React.FC = () => {
   }, []);
 
 
-  
+ 
   return (
     <HeaderTag>
       <Space style={{ gap: "4px" }}>
@@ -122,19 +124,34 @@ const Header: React.FC = () => {
           <Button shape="circle" icon={<StepForwardOutlined />} />
         </Tooltip>
       </Space>
+
       <form>
+
         <label>
           <SearchOutlined />
         </label>
         <input
+
+          type="text"
+
         ref={searchInputRef}
           type="search"
+
           placeholder="검색어를 입력해 주세요."
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               // 엔터 키가 눌렸을 때 검색 로직
             }
           }}
+
+          // onFocus={handleInputFocus}
+          // ref={searchInputRef}
+        />
+      </SearchForm>
+      <Userwrap>
+        <Profile />
+      </Userwrap>
+
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           // onFocus={handleInputFocus}
@@ -151,11 +168,18 @@ const Header: React.FC = () => {
         <button onClick={handleSignOut}>로그아웃</button>
         <Profile />
       </div>
+
     </HeaderTag>
   );
 };
 
 export default Header;
+
+const HeaderWrap = styled.header`
+  width: 100%;
+  height: 140px;
+  background-color: green;
+`;
 
 const HeaderTag = styled.header`
   position: relative;
@@ -171,6 +195,10 @@ const HeaderTag = styled.header`
 
   input {
     padding: 10px;
+    width: 500px;
+    border: none;
+    border-radius: 8px;
+  }
     width: 320px;
     border: none;
     border-radius: 8px;
@@ -192,3 +220,19 @@ const HeaderTag = styled.header`
     
   }
 `;
+
+const SearchForm = styled.form`
+  position: relative; left: 0 ; top: 0;
+  >label{
+    position: absolute; right: 10px; top: 50%;
+    margin-top: -8px;
+  }
+`
+
+const Userwrap = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+`;
+
+
